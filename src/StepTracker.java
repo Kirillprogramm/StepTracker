@@ -99,11 +99,12 @@ public class StepTracker {
         int series = 0;
         int maxSeries = 0;
         for (int i = 0; i < stepsPerDay.size(); i++) {
-            if (stepsPerDay.get(i) > goalStep) {
+            if (stepsPerDay.get(i) >= goalStep) {
                 series = series + 1;
 
                 if (series > maxSeries) {
-                    maxSeries = series;
+                    
+                   maxSeries = series;
                 }
             } else {
                 series = 0;
