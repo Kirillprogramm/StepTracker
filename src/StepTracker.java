@@ -34,6 +34,10 @@ public class StepTracker {
 
     void goStepsInDay(String month) {
         ArrayList<Integer> stepsPerDay = monthOfDay.get(month);
+        if(monthOfDay.get(month) == null){
+            System.out.println("У Вас не заполнены данные за месяц.");
+        }
+
         for (int i = 0 ; i < stepsPerDay.size(); i++) {
             System.out.println((i + 1) + " день: " + stepsPerDay.get(i));
         }
@@ -92,25 +96,20 @@ public class StepTracker {
         ArrayList<Integer> stepsPerDay = monthOfDay.get(month);
         ArrayList<Integer> listBestSeries = new ArrayList<>();
 
-        int dayRow = 0;
+        int series = 0;
+        int maxSeries = 0;
         for (int i = 0; i < stepsPerDay.size(); i++) {
             if (stepsPerDay.get(i) > goalStep) {
-                if (i - (i - 1) == 1) {
-                    dayRow++; // плюсую 1 к счетчику серии
-                    System.out.println("серия - " + dayRow + " дней.");
+                series = series + 1;
+
+                if (series > maxSeries) {
+                    maxSeries = series;
                 }
+            } else {
+                series = 0;
             }
-            listBestSeries.add(dayRow);
         }
-
-        int bestSeries = 0;
-        for (Integer row : listBestSeries) {
-            if (bestSeries < row) {
-                bestSeries = row;
-            }
-
-        }
-        System.out.println("Лучшая серия - " + (bestSeries) + " дней.");
+        System.out.println("Лучшая серия: " + maxSeries);
     }
 
     int newGoalStep(){
