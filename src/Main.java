@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int goalStep = 1;
+        int goalStep = 10000;
         System.out.println("Ваше целевое значение шагов в день - " + goalStep);
 
         String[] months = {"Январь","Февраль","Март","Апрель","Май", "Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"};
@@ -22,12 +22,23 @@ public class Main {
                 }
 
                 int monthDigits = scanner.nextInt();  // изменить ввод на цифры
+
+                if(monthDigits < 0){
+                    System.out.println("Число месяца не может быть отрицательным.");
+
+                }
                 String month = months[monthDigits - 1];
 
                 System.out.println("За какой день месяца " + month  + " вы хотите ввести шаги? Введите от 1 до 30:");
                 int day = scanner.nextInt();
+                if(day < 0){
+                    System.out.println("День месяца не может быть отрицательным.");
 
-                System.out.println("Введите количество за шагов за " + day + " день месяца " + month + ":");
+                }else{
+                    System.out.println("Введите количество за шагов за " + day + " день месяца " + month + ":");
+                }
+
+
                 int step = scanner.nextInt();
 
                 stepTracker.addSteps(month, day, step);
@@ -52,9 +63,14 @@ public class Main {
             } else if (userInput == 3) {
 
                 goalStep = stepTracker.newGoalStep();
+                if(goalStep < 0){
+                    System.out.println("Целевое значение шагов не может быть отрицательным.");
+                }else{
+                    System.out.println("Целевое количество шагов изменено.");
+                    System.out.println("Ваша новая цель - " + goalStep + " шагов в день!");
+                }
 
-                System.out.println("Целевое количество шагов изменено.");
-                System.out.println("Ваша новая цель - " + goalStep + " шагов в день!");
+
 
             } else if (userInput == 0) {
                 System.out.println("Выход");
